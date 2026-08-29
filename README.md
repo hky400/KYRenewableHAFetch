@@ -11,8 +11,8 @@ NOTE:  At this time, the web address for the real-time JSON file is left blank i
 ##  Expected format of the JSON file
 The file at the minimum will have a "Time" field, a "Solar Generation (%)" field, a "Wind Generation (%)" field, and a "Hydro Generation (%)" field.  An example of the file, with just the required lines, is shown below: 
 
-[
-  {
+[ \\
+  { \\
     "Time": "2026-08-28 21:54:37",
     "Solar Generation (%)": 15.1,
     "Wind Generation (%)": 9.1,
