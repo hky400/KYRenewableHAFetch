@@ -12,11 +12,11 @@ NOTE:  At this time, the web address for the real-time JSON file is left blank i
 The file at the minimum will have a "Time" field, a "Solar Generation (%)" field, a "Wind Generation (%)" field, and a "Hydro Generation (%)" field.  An example of the file, with just the required lines, is shown below: 
 
 [ \
-&ensp{ \
-&ensp&ensp"Time": "2026-08-28 21:54:37",\
-&ensp&ensp"Solar Generation (%)": 15.1,\
-&ensp&ensp"Wind Generation (%)": 9.1,\
-&ensp&ensp"Hydro Generation (%)": 0,\
-&ensp}\
+&ensp;{ \
+&ensp;&ensp;"Time": "2026-08-28 21:54:37",\
+&ensp;&ensp;"Solar Generation (%)": 15.1,\
+&ensp;&ensp;"Wind Generation (%)": 9.1,\
+&ensp;&ensp;"Hydro Generation (%)": 0,\
+&ensp;}\
 ]\
 
