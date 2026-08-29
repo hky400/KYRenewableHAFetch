@@ -1,0 +1,18 @@
+- id: '1733420634705'
+  alias: Mylighttriggerautomation
+  description: ''
+  trigger:
+    platform: time_pattern
+    seconds: /5
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.wiz_rgbw_tunable_752ff2
+    data:
+      rgb_color:
+      - '{{ state_attr(''sensor.KYRenewableHAFetch'', ''Solar Generation (%)'') }}'
+      - '{{ state_attr(''sensor.KYRenewableHAFetch'', ''Wind Generation (%)'') }}'
+      - '{{ state_attr(''sensor.KYRenewableHAFetch'', ''Hydro Generation (%)'') }}'
+  mode: single
