@@ -18,6 +18,6 @@ The file at the minimum will have a "Time" field, a "Solar Generation (%)" field
 &ensp;&ensp;"Wind Generation (%)": 9.1,\
 &ensp;&ensp;"Hydro Generation (%)": 0,\
 &ensp;}\
-]\
+]
 
 
