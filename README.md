@@ -20,3 +20,4 @@ The file at the minimum will have a "Time" field, a "Solar Generation (%)" field
 &ensp;}\
 ]\
 
+
