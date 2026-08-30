@@ -1,0 +1,16 @@
+homeassistant:
+  packages: !include_dir_named packages
+
+default_config: 
+
+#notify:
+#  - name: "NOTIFIER_NAME"
+#    platform: smtp
+#    sender: "Home_Assistant"
+#    recipient: "number@txt.att.net"
+
+automation: !include automations.yaml
+conversation:
+script: !include scripts.yaml 
+scene: !include scenes.yaml
+mobile_app:
