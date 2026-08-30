@@ -1,0 +1,38 @@
+make_light_solar:
+  alias: Make Light Solar
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.globe_nightlight
+      data:
+        rgb_color: [255, 165, 0]
+        brightness: >
+          {% set pct = states('sensor.solar_generation') | float(0) %}
+          {{ (pct * 2.55) | round(0) }}
+  mode: single
+
+make_light_hydro:
+  alias: Make Light Hydro
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.globe_nightlight
+      data:
+        rgb_color: [0, 0, 255]
+        brightness: >
+          {% set pct = states('sensor.hydro_generation') | float(0) %}
+          {{ (pct * 2.55) | round(0) }}
+  mode: single
+ 
+make_light_wind:
+  alias: Make Light Wind
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.globe_nightlight
+      data:
+        rgb_color: [0, 255, 0]
+        brightness: >
+          {% set pct = states('sensor.wind_generation') | float(0) %}
+          {{ (pct * 2.55) | round(0) }}
+  mode: single
