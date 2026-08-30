@@ -1,0 +1,30 @@
+automation: 
+- alias: Phone Notification When Dominant Source Changes
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.energy_dominant_source
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state | lower not in [''unknown'', ''unavailable'']
+      }}'
+  - condition: time
+    after: '9:00:00'
+    before: '15:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: notify.mobile_app_chromebook
+    data:
+      title: New Dominant Source
+      message: "{% if trigger.from_state.state | lower in ['unknown', 'unavailable']
+        %}\n  New source is {{ trigger.to_state.state }}\n{% else %}\n  The source
+        is {{ trigger.to_state.state }}. It changed from {{ trigger.from_state.state
+        }}.\n{% endif %}\n"
+  id: 7621965024c74e40adb8160f1fb32475
+  mode: single

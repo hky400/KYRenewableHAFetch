@@ -1,0 +1,19 @@
+template:
+  - sensor:
+      - name: "Solar Generation %"
+        unique_id: solar_generation_sensor
+        device_class: humidity #experimental line
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | round (1) }}"
+
+      - name: "Wind Generation %"
+        unique_id: wind_generation_sensor
+        device_class: humidity #experimental line
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') }}"
+
+      - name: "Hydro Generation %"
+        unique_id: hydro_generation_sensor
+        device_class: humidity #experimental line
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') }}"

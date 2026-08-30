@@ -1,0 +1,21 @@
+template:
+  - sensor:
+      - name: "Dominance Index"
+        unique_id: dominance_index_sensor
+        unit_of_measurement: "%"
+        device_class: humidity #experimental line
+        state: >
+          {% set solar = states('sensor.solar_generation') | float(0) %}
+          {% set wind = states('sensor.wind_generation') | float(0) %}
+          {% set hydro = states('sensor.hydro_generation') | float(0) %}
+          {% set dominant = states('sensor.energy_dominant_source') | lower %}
+
+          {% if dominant in ['solar', 'wind', 'hydro'] %}
+          {% set sources = {'solar': solar, 'wind': wind, 'hydro': hydro} %}
+          {% set dominant_value = sources[dominant] %}
+          {% set others = sources.items() | selectattr('0', 'ne', dominant) | map(attribute='1') | list %}
+          {% set avg_other = (others[0] + others[1]) / 2 %}
+          {{ (dominant_value - avg_other) | round(1) }}
+          {% else %}
+            unavailable
+          {% endif %}

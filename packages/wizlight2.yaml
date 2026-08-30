@@ -1,0 +1,19 @@
+automation:
+- id: '1733420634705'
+  alias: Mylighttriggerautomation
+  description: ''
+  triggers:
+  - seconds: /5
+    trigger: time_pattern
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.wizcolor2
+    data:
+      rgb_color:
+      - '{{ state_attr(''sensor.LGEJSONReadFile'', ''Solar Generation (%)'')  }}'
+      - '{{ state_attr(''sensor.LGEJSONReadFile'', ''Wind Generation (%)'')  }}'
+      - '{{ state_attr(''sensor.LGEJSONReadFile'', ''Hydro Generation (%)'')  }}'
+  mode: single

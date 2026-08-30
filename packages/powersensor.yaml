@@ -1,0 +1,7 @@
+template:
+  - sensor:
+      - name: "Power Sensor"
+        unique_id: power_sensor
+        device_class: temperature #experimental line
+        unit_of_measurement: "W"
+        state: "{{ states('sensor.smart_plug1_current_consumption') | float(0) }}"

@@ -1,0 +1,65 @@
+automation:
+- alias: Govee Nightlight Color Change
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.solar_generation
+    - sensor.wind_generation
+    - sensor.hydro_generation
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: >
+          {{ state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') | float and 
+             state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') | float }}
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.govee
+        data:
+          rgb_color:
+          - 255
+          - 165
+          - 0
+          brightness: 255
+    - conditions:
+      - condition: template
+        value_template: > 
+          {{ state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | float and 
+             state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') | float }}
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.govee
+        data:
+          rgb_color:
+          - 0
+          - 255
+          - 0
+          brightness: 255
+    - conditions:
+      - condition: template
+        value_template: >
+          {{ state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | float and
+             state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') | float > 
+             state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') | float }}
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.govee
+        data:
+          rgb_color:
+          - 0
+          - 0
+          - 255
+          brightness: 255
+  id: da89c37a9c484028898812df3d5408ec
+  mode: single

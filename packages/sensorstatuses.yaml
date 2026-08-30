@@ -1,0 +1,46 @@
+template:
+    - sensor:
+        - name: "Solar Status"
+          unique_id: solar_status_sensor
+          state: >
+           {% set gen = states('sensor.solar_generation') | float %}
+           {% set threshold = states('input_number.solar_threshold') | float %}
+           
+           {% if gen == 0 %}
+             Zero
+           {% elif gen > threshold %}
+             Good
+           {% else %}
+             Bad
+           {% endif %}
+        - name: "Hydro Status"
+          unique_id: hydro_status_sensor
+          state: >
+           {% set gen = states('sensor.hydro_generation') | float %}
+           {% set threshold = states('input_number.hydro_threshold') | float %}
+
+           {% if gen == 0 %}
+             Zero
+           {% elif gen > threshold %}
+             Good
+           {% else %}
+             Bad
+           {% endif %}
+        - name: "Wind Status"
+          unique_id: wind_status_sensor
+          state: >
+           {% set gen = states('sensor.wind_generation') | float %}
+           {% set threshold = states('input_number.wind_threshold') | float %}
+
+           {% if gen == 0 %}
+             Zero
+           {% elif gen > threshold %}
+             Good
+           {% else %}
+             Bad
+           {% endif %}
+        - name: "Overall Status"
+          unique_id: overall_status_sensor
+          state: >
+            {% set count = [states('sensor.solar_status'), states('sensor.hydro_status'), states('sensor.wind_status')] | select ('equalto', 'Good') | list | length %}
+            {{ ['Bad', 'Okay', 'Fine', 'Good'][count] }}

@@ -1,0 +1,18 @@
+sensor:
+  - platform: rest
+    resource: "https://m.lkeportal.com/publicsolarbatch/ESS.json"
+    name: LGEJSONReadFile
+    scan_interval: 20
+    #    json_attributes_path: "$.."
+    # The "value_template statement below is not used, but is supposed to avoid state max length error.
+    # Idea came from "https://community.home-assistant.io/t/rest-sensor-state-max-length-is-255-characters/31807/13
+    value_template: '1'
+    json_attributes:
+      - "Time"
+      - "Wind Generation (kW)"
+      - "Solar Generation (kW)"
+      - "Solar Generation (%)"
+      - "Wind Generation (%)"     
+      - "Hydro Generation (%)"  
+    #resource: "https://m.lkeportal.com/publicsolarbatch/ESS.json/."
+    authentication: basic

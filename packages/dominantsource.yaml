@@ -1,0 +1,17 @@
+template:
+  - sensor:
+      - name: "Energy Dominant Source"
+        unique_id: energy_dominant_source_sensor
+        state: >
+          {% set solar = state_attr('sensor.LGEJSONReadFile', 'Solar Generation (%)') | float %}
+          {% set wind = state_attr('sensor.LGEJSONReadFile', 'Wind Generation (%)') | float %}
+          {% set hydro = state_attr('sensor.LGEJSONReadFile', 'Hydro Generation (%)') | float %}
+          {% if solar > wind and solar > hydro %}
+            Solar
+          {% elif wind > solar and wind > hydro %}
+            Wind
+          {% elif hydro > solar and hydro > wind %}
+            Hydro
+          {% else %}
+            Tie
+          {% endif %}

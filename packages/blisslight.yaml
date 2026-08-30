@@ -1,0 +1,17 @@
+automation:
+  - alias: BlissLight (Hydro)
+    description: "Hydro Light That Changes Based on Brightness"
+    trigger: 
+      - platform: time_pattern
+        seconds: "/10"
+    action: 
+      - service: light.turn_on
+        target:
+          entity_id: light.blissember
+        data:
+          brightness: >
+            {% set pct = states('sensor.hydro_generation') | float(0) %}
+            {% set brightness = ((pct / 100) * 254) + 1 %}
+            {{ brightness | round(0) | int }}
+          hs_color: [240, 100] 
+    mode: single 

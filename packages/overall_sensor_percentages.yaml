@@ -1,0 +1,17 @@
+template:
+  - sensor:
+      - name: "Overall Sensor %"
+        unique_id: overall_sensor_sensor
+        device_class: humidity #experimental line
+        unit_of_measurement: "%"
+        state: >
+          {% set status = states('sensor.overall_status') %}
+          {% if status == 'Good' %}
+            100
+          {% elif status == 'Fine' %}
+            66
+          {% elif status == 'Okay' %}
+            33
+          {% elif status == 'Bad' %}
+            0
+          {% endif %}
