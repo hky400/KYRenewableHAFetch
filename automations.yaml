@@ -1,0 +1,110 @@
+- id: '1754601023610'
+  alias: CO2 Automation
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.apollo_msr_1_c3d4e8_co2
+  condition: 
+    - condition: numeric_state
+      entity_id: sensor.apollo_msr_1_c3d4e8_co2
+      below: 600
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.apollo_msr_1_c3d4e8_rgb_light
+    data:
+      hs_color: [120, 100]
+      brightness: 255
+  mode: single
+
+- id: '1755037885686'
+  alias: New automation
+  description: ''
+  triggers:
+  - type: changed_states
+    device_id: d3a0061b811c8c5c03112e2a35895e9d
+    entity_id: d87ca5ebdeae3195cf7cd7957db40388
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - action: notify.myemailaddresshere_gmail_com
+    metadata: {}
+    data:
+      message: DemoLight Has Turned On/Off
+      title: Test
+      target:
+        - myemailaddresshere@gmail.com
+        - anotheremailaddress@gmail.com
+  mode: single
+- id: '1755122692819'
+  alias: DemoLight1
+  description: ''
+  triggers:
+  - device_id: 3022b038e563a2adaaa91066c601d9e1
+    domain: zha
+    type: remote_button_short_press
+    subtype: button
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: d3a0061b811c8c5c03112e2a35895e9d
+  mode: single
+- id: '1755122723043'
+  alias: Demolight2
+  description: ''
+  triggers:
+  - device_id: 3022b038e563a2adaaa91066c601d9e1
+    domain: zha
+    type: remote_button_double_press
+    subtype: button
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: 4039f9627affbd4f160f31600b23a47c
+  mode: single
+- id: '1755122752866'
+  alias: Demolight3
+  description: ''
+  triggers:
+  - device_id: 3022b038e563a2adaaa91066c601d9e1
+    domain: zha
+    type: remote_button_long_press
+    subtype: button
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: e55797448d2a9107e6e6ee35beb9e521
+  mode: single
+- id: '1755122970331'
+  alias: Shut off switch
+  description: ''
+  triggers:
+  - device_id: 3022b038e563a2adaaa91066c601d9e1
+    domain: button
+    entity_id: e0385327baa388f0d048f5941a69a029
+    type: pressed
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - d3a0061b811c8c5c03112e2a35895e9d
+      - 4039f9627affbd4f160f31600b23a47c
+      - e55797448d2a9107e6e6ee35beb9e521
+  mode: single
