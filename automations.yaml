@@ -18,7 +18,7 @@
   mode: single
 
 - id: '1755037885686'
-  alias: New automation
+  alias: NotifyEmail
   description: ''
   triggers:
   - type: changed_states
