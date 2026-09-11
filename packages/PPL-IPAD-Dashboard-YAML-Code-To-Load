@@ -1,0 +1,71 @@
+# This is the code for the PPL-IPAD dashboard.  This cannot be loaded
+# directly by Home Assistant.  It must be copied and manually pasted into a 
+# dashboard setup. 
+# This has some additional elements in it for light control.  Those should
+# be deleted.
+views:
+  - type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Renewables generation history (tap for web)
+            heading_style: subtitle
+            tap_action:
+              action: url
+              url_path: https://18.191.102.14/
+          - type: history-graph
+            entities:
+              - entity: sensor.solar_gen
+            hours_to_show: 24
+          - type: history-graph
+            entities:
+              - sensor.wind_gen
+            hours_to_show: 24
+          - type: history-graph
+            entities:
+              - sensor.hydro_gen
+            hours_to_show: 24
+          - type: weather-forecast
+            entity: weather.forecast_home
+            forecast_type: daily
+      - type: grid
+        cards:
+          - type: heading
+            heading: New section
+          - type: gauge
+            entity: sensor.solar_gen
+          - type: gauge
+            entity: sensor.wind_gen
+          - type: gauge
+            entity: sensor.hydro_gen
+          - type: history-graph
+            entities:
+              - entity: >-
+                  binary_sensor.home_office_officepresence_sensor_fp2_b52f_presence_sensor_1
+          - type: history-graph
+            entities:
+              - entity: >-
+                  sensor.home_office_officepresence_sensor_fp2_b52f_light_sensor_light_level
+            grid_options:
+              rows: 2
+              columns: full
+          - type: tile
+            entity: light.wiz_rgbw_tunable_955392
+            features:
+              - type: light-brightness
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            entity: light.wiz_rgbw_tunable_8915da
+            features:
+              - type: light-brightness
+            grid_options:
+              columns: 12
+              rows: 2
+    header:
+      card:
+        type: markdown
+        text_only: true
+        content: '## PPL-R&D Kentucky Renewables Dashboard  '

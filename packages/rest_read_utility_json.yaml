@@ -1,0 +1,37 @@
+ # alias: "This reads the utility data JSON file and generates a 'sensor' with attributes corresponding to the data read."
+rest:
+  - authentication: basic
+    scan_interval: 30
+    resource: "https://m.lkeportal.com/publicsolarbatch/ESS.json"
+    sensor:
+      - name: RESTRead_utility_JSON
+        json_attributes: 
+          - "Time"
+          - "Wind Generation (kW)"
+          - "Solar Generation (kW)"
+          - "Solar Generation (%)"
+          - "Wind Generation (%)"     
+          - "Hydro Generation (%)"
+          - "Battery System Running"
+
+# description: "This converts the data from the JSON RESTRead attributes into easily accessible simple sensor emulations." 
+template:
+
+  - sensor:
+      - name: "Solar Gen %"
+        unique_id: solar_gen_sensor
+        device_class: signal_strength
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.restread_utility_json', 'Solar Generation (%)') | float(1) }}"
+
+      - name: "Wind Gen %"
+        unique_id: wind_gen_sensor
+        device_class: signal_strength
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.restread_utility_json', 'Wind Generation (%)') | float(1) }}"
+
+      - name: "Hydro Gen %"
+        unique_id: hydro_gen_sensor
+        device_class: signal_strength
+        unit_of_measurement: "%"
+        state: "{{ state_attr('sensor.restread_utility_json', 'Hydro Generation (%)') | float(1) }}"

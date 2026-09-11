@@ -1,0 +1,21 @@
+automation:
+  - id: "setlightrenewablesjsonupdate"
+    #friendly_name: "SetLightColorRenewablesJSONupdate"
+    alias: 'Set Light Color by Renewables JSON Update'
+    description: 'This sets the color of the light based on JSON renewables data'
+    triggers:
+      - seconds: /5
+        trigger: time_pattern
+    conditions: []
+    actions:
+      - action: light.turn_on
+        metadata: {}
+        target:
+          entity_id: light.wiz_rgbw_tunable_752ff2
+        data:
+          rgb_color:
+          - '{{ (states(''sensor.solar_gen'') | float(1)/100 *255) }}'
+          - '{{ (states(''sensor.wind_gen'') | float(1)/100 *255) }}'
+          - '{{ (states(''sensor.hydro_gen'') | float(1)/100 *255) }}'
+    mode: single
+    

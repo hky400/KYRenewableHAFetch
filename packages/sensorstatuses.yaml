@@ -3,7 +3,7 @@ template:
         - name: "Solar Status"
           unique_id: solar_status_sensor
           state: >
-           {% set gen = states('sensor.solar_generation') | float %}
+           {% set gen = states('sensor.solar_gen_sensor') | float %}
            {% set threshold = states('input_number.solar_threshold') | float %}
            
            {% if gen == 0 %}
@@ -16,7 +16,7 @@ template:
         - name: "Hydro Status"
           unique_id: hydro_status_sensor
           state: >
-           {% set gen = states('sensor.hydro_generation') | float %}
+           {% set gen = states('sensor.hydro_gen_sensor') | float %}
            {% set threshold = states('input_number.hydro_threshold') | float %}
 
            {% if gen == 0 %}
@@ -29,7 +29,7 @@ template:
         - name: "Wind Status"
           unique_id: wind_status_sensor
           state: >
-           {% set gen = states('sensor.wind_generation') | float %}
+           {% set gen = states(    'sensor.wind_gen_sensor') | float %}
            {% set threshold = states('input_number.wind_threshold') | float %}
 
            {% if gen == 0 %}
