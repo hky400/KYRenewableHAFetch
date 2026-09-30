@@ -1,0 +1,34 @@
+
+
+alias: LarryPhoneNotify2
+use_blueprint:
+  path: homeassistant/confirmable_notification.yaml
+  input:
+    notify_device: e9aba1b76d97817f828a68b247d44833
+    title: mynotificationbutton
+    message: This is an example of my using a Confirmable Notification blueprint
+    confirm_text: >-
+      Do you want to flash the lights Red? Please confirm, or else lights will
+      flash blue.
+    confirm_action:
+      - action: light.turn_on
+        metadata: {}
+        target:
+          area_id: home_office
+        data:
+          rgb_color:
+            - 240
+            - 20
+            - 20
+    dismiss_action:
+      - action: light.turn_on
+        metadata: {}
+        target:
+          area_id: home_office
+        data:
+          rgb_color:
+            - 18
+            - 94
+            - 13
+          color_temp_kelvin: 2000
+description: ''
