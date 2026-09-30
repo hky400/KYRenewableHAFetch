@@ -1,0 +1,44 @@
+automation: 
+ - alias: pointofuse_Light_Change
+   trigger:
+     platform: state
+     entity_id: sensor.overall_renewables_status
+   condition: []
+   action:
+     - choose:
+         - conditions:
+             - condition: template
+               value_template: "{{ states('sensor.overall_renewables_status') == 'High_Availability' }}"
+           sequence: 
+             - service: light.turn_on
+               target:
+                 entity_id: light.blissember_plug_in
+               data:
+                 rgb_color: [0, 255, 50]
+         - conditions:
+             - condition: template
+               value_template: "{{ states('sensor.overall_renewables_status') == 'Medium_Availability' }}"
+           sequence: 
+             - service: light.turn_on
+               target:
+                 entity_id: light.blissember_plug_in
+               data:
+                 rgb_color: [100, 200, 0]
+         - conditions:
+             - condition: template
+               value_template: "{{ states('sensor.overall_renewables_status') == 'Low_Availability' }}"
+           sequence: 
+             - service: light.turn_on
+               target:
+                 entity_id: light.blissember_plug_in
+               data:
+                 rgb_color: [200, 150, 0]
+         - conditions:
+             - condition: template
+               value_template: "{{ states('sensor.overall_renewables_status') == 'Below_Minimum' }}"
+           sequence: 
+             - service: light.turn_on
+               target:
+                 entity_id: light.blissember_plug_in
+               data:
+                 rgb_color: [255, 0, 0]

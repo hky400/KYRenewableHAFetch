@@ -1,0 +1,50 @@
+# This automation turns on the smart plug (the target under actions section) 
+# when the overall renewables status is either Fine or Good
+  automation: 
+    - id: 'WizPlugSwitchOnbyrenewables'
+      alias: WizPlugSwitchtoON
+      description: ''
+      triggers:
+      - trigger: state
+        entity_id:
+        - sensor.overall_renewables_status
+      condition:
+        - condition: state
+          entity_id: sensor.overall_renewables_status
+          state: 
+            - "Medium_Availability"
+            - "High_Availability"
+      actions:
+      - action: switch.turn_on
+        metadata: {}
+        target:
+        # Change the device ID below to be the smart plug you are using
+          device_id: be661b19973904b18dd0f067766a4375  
+        data: {}
+      mode: single
+
+
+# This automation turns off the smart plug (the target under the actions section) 
+# when the overall renewables status is only Bad or Okay
+    - id: 'WizPlugSwitchOffbyrenewables'
+      alias: WizPlugSwitchtoOFF
+      description: ''
+      triggers:
+      - trigger: state
+        entity_id:
+        - sensor.overall_renewables_status
+      condition:
+        - condition: state
+          entity_id: sensor.overall_renewables_status
+          state: 
+            - "Below_Minimum"
+            - "Low_Availability"
+      actions:
+      - action: switch.turn_off
+        metadata: {}
+        target:
+        # Change the entity ID below to be the smart plug you are using
+          entity_id: switch.wiz_socket_a85a03
+        data: {}
+      mode: single
+

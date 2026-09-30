@@ -1,0 +1,37 @@
+automation:
+    - id: 'SendEmailMessageStatus'
+      alias: SendEmailOnOverallRenewablesStatusTrigger
+      description: ''
+      triggers: 
+        - platform: state
+          entity_id: sensor.overall_renewables_status
+          from: 
+            - "Below_Minimum"
+            - "Low_Availability"
+          to: 
+            - "Medium_Availability"
+            - "High_Availability"
+      actions:
+      - action: smtp.send_message
+        metadata: {}
+        target:
+          entity_id: notify.home_office_homeassistant_emaillarry_larry_fromhomeassistant
+        data:
+          title: "Home Assistant - overall renewables status trigger"
+          message: >
+            This is an automated notification from your Home Assistant.
+              
+            The overall renewables status sensor has changed from less than two renewables
+            meeting their thresholds ("Below_Minimum" or "Low_Availability" state)  
+            to having at least two renewables meeting their thresholds 
+            ("Medium_Availability" or "High_Availability" state). 
+            
+               
+            Current readings: 
+              Solar % value: {{ states( 'sensor.solar_gen' ) }} vs. threshold: {{ states( 'input_number.solar_threshold' ) }} 
+              Wind % value: {{ states( 'sensor.wind_gen' ) }} vs. threshold: {{ states( 'input_number.wind_threshold' ) }} 
+              Hydro % value: {{ states( 'sensor.hydro_gen' ) }} vs. threshold: {{ states( 'input_number.hydro_threshold' ) }} 
+             
+              Current availability state:  {{ states( 'sensor.overall_renewables_status' ) }} 
+      mode: single
+      
