@@ -24,20 +24,20 @@ rest:
 # The device_class is listed as battery since that gives us the default unit_of_measurement of percent.
 template:
   - sensor:
-      - name: "Solar Gen %"
-        unique_id: solar_gen_sensor
+      - name: "Solar Gen Percent"
+        unique_id: solar_gen_percent_sensor
         device_class: battery
         unit_of_measurement: "%"
         state: "{{ state_attr('sensor.restread_utility_json', 'Solar Generation (%)') | float(1) }}"
 
-      - name: "Wind Gen %"
-        unique_id: wind_gen_sensor
+      - name: "Wind Gen Percent"
+        unique_id: wind_gen_percent_sensor
         device_class: battery
         unit_of_measurement: "%"
         state: "{{ state_attr('sensor.restread_utility_json', 'Wind Generation (%)') | float(1) }}"
 
-      - name: "Hydro Gen %"
-        unique_id: hydro_gen_sensor
+      - name: "Hydro Gen Percent"
+        unique_id: hydro_gen_percent_sensor
         device_class: battery
         unit_of_measurement: "%"
         state: "{{ state_attr('sensor.restread_utility_json', 'Hydro Generation (%)') | float(1) }}"

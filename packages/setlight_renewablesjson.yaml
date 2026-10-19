@@ -14,18 +14,18 @@ automation:
           entity_id: light.wiz_rgbw_tunable_752ff2
         data:
           brightness_pct: >-
-              {% if (states('sensor.solar_gen') | float) > 0 %}
+              {% if (states('sensor.solar_genpercent') | float) > 0 %}
               100 
-              {% elif (states('sensor.wind_gen') | float) > 0 %}
+              {% elif (states('sensor.wind_genpercent') | float) > 0 %}
               100 
-              {% elif  (states('sensor.hydro_gen') | float) > 0 %}
+              {% elif  (states('sensor.hydro_genpercent') | float) > 0 %}
               100
               {% else %} 
               0
               {% endif %}  
           rgb_color:
-            - '{{ (states(''sensor.solar_gen'') | float(0)/100 *255) }}'
-            - '{{ (states(''sensor.wind_gen'') | float(0)/100 *255) }}'
-            - '{{ (states(''sensor.hydro_gen'') | float(0)/100 *255) }}' 
+            - '{{ (states(''sensor.solar_genpercent'') | float(0)/100 *255) }}'
+            - '{{ (states(''sensor.wind_genpercent'') | float(0)/100 *255) }}'
+            - '{{ (states(''sensor.hydro_genpercent'') | float(0)/100 *255) }}' 
     mode: single
     

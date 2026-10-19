@@ -16,15 +16,15 @@ views:
               url_path: https://18.191.102.14/
           - type: history-graph
             entities:
-              - entity: sensor.solar_gen
+              - entity: sensor.solar_genpercent
             hours_to_show: 24
           - type: history-graph
             entities:
-              - sensor.wind_gen
+              - entity: sensor.wind_genpercent
             hours_to_show: 24
           - type: history-graph
             entities:
-              - sensor.hydro_gen
+              - entity: sensor.hydro_genpercent
             hours_to_show: 24
           - type: weather-forecast
             entity: weather.forecast_home
@@ -34,19 +34,17 @@ views:
           - type: heading
             heading: New section
           - type: gauge
-            entity: sensor.solar_gen
+            entity: sensor.solar_genpercent
           - type: gauge
-            entity: sensor.wind_gen
+            entity: sensor.wind_genpercent
           - type: gauge
-            entity: sensor.hydro_gen
+            entity: sensor.hydro_genpercent
           - type: history-graph
             entities:
-              - entity: >-
-                  binary_sensor.home_office_officepresence_sensor_fp2_b52f_presence_sensor_1
+              - entity: binary_sensor.home_office_officepresence_sensor_fp2_b52f_presence_sensor_1
           - type: history-graph
             entities:
-              - entity: >-
-                  sensor.home_office_officepresence_sensor_fp2_b52f_light_sensor_light_level
+              - entity: sensor.home_office_officepresence_sensor_fp2_b52f_light_sensor_light_level
             grid_options:
               rows: 2
               columns: full
@@ -64,6 +62,53 @@ views:
             grid_options:
               columns: 12
               rows: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading: New section
+          - type: tile
+            entity: sensor.overall_renewables_status
+            grid_options:
+              columns: 12
+              rows: 1
+          - type: tile
+            entity: input_number.solar_threshold
+            features:
+              - type: numeric-input
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            entity: input_number.wind_threshold
+            features:
+              - type: numeric-input
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            entity: input_number.hydro_threshold
+            features:
+              - type: numeric-input
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: tile
+            grid_options:
+              columns: 6
+              rows: 1
+            entity: sensor.solar_status
+            show_entity_picture: false
+            hide_state: false
+            vertical: false
+            features_position: bottom
+          - type: tile
+            entity: sensor.wind_status
+          - type: tile
+            entity: sensor.hydro_status
+      - type: grid
+        cards:
+          - type: heading
+            heading: Forecast
     header:
       card:
         type: markdown
